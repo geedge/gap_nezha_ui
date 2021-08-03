@@ -1,0 +1,75 @@
+*** Variables ***
+#登录类型：api | cli | ${None}（tsg mib） | 未指定，默认为ui
+${loginType}      ui
+#执行环境是否Widonws
+${systemType}     Windows
+#API配置信息
+${host}           192.168.44.100
+${port}           8080
+${authmode}       1
+${authCode}       ${EMPTY}
+${ldapId}         27
+${version}        v1
+${version2}       v2
+${username}       dongxiaoyan
+${password}       dongxiaoyan
+${encodePassword}    ${EMPTY}
+${token}          ${EMPTY}
+#[Documentation]    测试终端IP统一配置
+${testClentIP}    192.168.32.116
+${testSubscriberID}    $test19
+#自动化标签
+${userTagIds}     ${EMPTY}
+#Documentation]    是否添加测试终端IP到策略统一配置，0为不添加测试终端IP，1为添加测试终端IP，默认1
+${addTestClentIPFlag}    1
+#测试环境是否需要把tsgui和api添加为SecurityPolicy-Allow  1为需要，默认1 ，
+${addTsgUIAPIFlag}    1
+#执行需要暂停时间
+#策略下发后到验证需等待时间
+${policyVerificationSleepSeconds}    20
+#策略验证后到验证策略日志需等待时间
+${policyLogVerificationSleepSeconds}    60
+${path}           C:/Users/admin/Desktop/sql/gap_nezha_ui/other/
+${Downloadpath}	  C:/Users/byb11/Downloads/
+${curlbatpath}    ${path}curl/
+${mailpath}       ${path}/mail/
+${responsePageFiles}    ${path}/response_pages_files/
+#全流程分阶段测试参数
+#[Documentation]    当前测试部分，all为一个终端全网全流程测试，
+#1为添加策略和对象测试；
+#2为功能端业务验证部分测试；
+#3为llog日志验证测试
+${testPart}       all
+#UI配置的本地IP名称
+${LocahIPName}    ${EMPTY}
+${ipType}         ipv4
+${ipMask}         255.255.255.255
+${browserType}    chrome
+# Cli自动化测试变量[start]
+${cliHost}        192.168.40.165
+${cliUsername}    tsgadmin
+${cliPassword}    Cli2019
+${timeout}        600s
+${retryInterval}    300s
+@{PolicyTypes}    tsg_security    pxy_manipulation
+@{ObjectTypes}    ip    url    fqdn    keywords    subscriberid    fqdn_category    account
+...               http_signature
+# Cli自动化测试变量[end]
+# SNMP服务测试变量[start]
+${snmpHost}       192.168.40.165
+${snmpPort}       50161
+${snmpConnTimeout}    5    # 默认超时时间为6s，设置timeout值后超时时间为n*6s
+${snmpCommunity}    public
+# SNMP服务测试变量[end]
+#API配置信息
+${oamHost}        192.168.40.210
+${oamPort}        50080
+${contrast}       0.1
+${editpasswd}	no	#设置密码过期时是否需要修改密码，no为不修改，yes为修改
+# Mysql数据库连接信息
+${mysqlHost}	host='192.168.44.72',port=3306,user='root',passwd='bifang!@#',database='tsg-bifang'
+#休息时间
+${sleep_min}    1
+${sleep}	2
+# 隐式等待时间
+${sleep_Wait}    20

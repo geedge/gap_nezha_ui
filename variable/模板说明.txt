@@ -1,0 +1,134 @@
+yaml语法请参考网上教程：
+https://www.runoob.com/w3cnote/yaml-intro.html
+https://www.cnblogs.com/sddai/p/9626392.html
+
+模板编写：
+页面的模板命名为:页面名称_page,全小写多单词下划线分隔，一个模板主要包括：OpenCreateOrEditPage、PageData、OkOrCancel 三部分。
+OpenCreateOrEditPage：分为create和edit两个部分，主要存放进入创建页面或者修改页面的元素定位信息。
+	编写规则：
+	OpenCreateOrEditPage：
+		create：
+			- 一级定位
+			- 二级定位
+			...
+			- 创建按钮定位
+		edit：
+			- 修改按钮定位
+			
+PageData：以列表形式记录创建修改数据时页面每一步操作。
+	编写规则：
+	PageData:
+		-
+			type: input
+			position: id=responsepages_profileName1
+			value: profileName
+		-
+			type: upload
+			position: xpath=//*[@id="policy_Manipulation_create6"]/div[2]/form/div/div/div/div/input
+			value: file
+			
+	type: 操作类型，暂时有input、upload、click、combination、switch、switchCombination、radioButton 
+	
+		input： 用于页面输入操作
+			type: input
+			position: 输入框定位
+			value: 输入框名称（同数据文件中记录输入内容字典的key值一致）
+		
+		upload：上传文件操作
+			type: upload
+			position: 上传文件定位
+			value: 上传文件控件名称（同数据文件中记录文件路径的字典key值一致）
+		
+		click：点击按钮操作
+			type: click
+			position: 按钮定位
+			value: 按钮名称
+		
+		combination：应用于多级操作，递归执行combination下的操作。
+			下面该多级操作为Insert Script创建页面对Script Type的操作，请参考页面。
+			type: combination
+			position: id=insert_select_format
+			value: Script Type
+			data:
+				- 
+				   type: click
+				   position: xpath=/html/body/div/div[1]/div[1]/ul/li[1]
+				   value: css
+				   data: null
+				-
+				   type: click
+				   position: xpath=/html/body/div/div[1]/div[1]/ul/li[2]
+				   value: js
+				   data: 
+					  -
+						 type: click
+						 position: id=insert_select_insertOn
+						 value: Insert on
+						 data:
+							-
+							   type: click
+							   position: xpath=/html/body/div[last()]/div[1]/div[1]/ul/li[1]
+							   value: Before Page Load
+							   data: null
+		
+		switch：开关按钮
+			type: switch
+			position: 按钮的定位
+			value: 按钮的名称（同数据文件中记录按钮状态的字典key值一致）
+			default: 按钮的默认状态（open、close）
+		
+		switchCombination：开关按钮的组合操作。
+			type: switchCombination
+			position: 开关按钮定位
+			value: 按钮的名称（同数据文件中记录按钮状态的字典key值一致）
+			default: 按钮的默认状态（open、close）
+			data:
+				-
+					type: input
+					position: id=hijack_contentName
+					value: downloadName
+		
+		radioButton：单选按钮
+			type: radioButton
+			position：null （由于没有定位所有给null）
+			value: Fail Action
+			data:
+				-
+				   type: click
+				   position: id=decryptionfail-close
+				   value: Fail-close
+				-
+				   type: click
+				   position: id=decryptionpass-through
+				   value: Pass-through
+
+OkOrCancel：记录点击Ok按钮及断言信息。
+	OkOrCancel:
+		position: Ok按钮定位
+        confirm: 确认信息操作
+        alerm: 创建成功断言定位信息
+        assertPosition: 搜索结果断言定位（name的定位）
+
+模板样例：
+response_page_page:
+   OpenCreateOrEditPage:
+      create:
+         - id=Settings
+         - xpath=//*[@id="Settings"]/ul/li[1]
+         - id=responseAdd
+      edit:
+         - id=resinseEdit
+   PageData: 
+      - 
+         type: input
+         position: id=responsepages_profileName1
+         value: profileName
+      - 
+         type: upload
+         position: xpath=//*[@id="policy_Manipulation_create6"]/div[2]/form/div/div/div/div/input
+         value: file
+   OkOrCancel: 
+      position: id=responseAddOk1
+      confirm: 确认信息操作
+      alerm: id=responseAdd
+      assertPosition: xpath=//*[@id="ly-table1-listcontent"]/div/div[3]/table/tbody/tr/td[2]/div/div/span

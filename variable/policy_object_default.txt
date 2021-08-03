@@ -1,0 +1,53 @@
+*** Variables ***
+# 通用
+${Default_IsValid}             ${1}
+${Default_IsDelete}             false
+
+# 策略
+${Default_PolicyName}          autotest_policy
+${Default_PolicyType}          tsg_security
+${Default_PolicyDesc}          autotest        
+${Default_Action}              deny    
+${Default_PolicySubAction}     drop
+${Default_EffectiveRange}           
+${Default_UserRegion}          method:rst
+${Default_ReferenceObject}     ${EMPTY}
+${Default_AppObjectIdArray}    []
+${Default_UserTags}            ${EMPTY}
+${Default_DoLog}               ${1}
+${Default_ScheduleId}          ${EMPTY}
+#策略v2
+${Default_v2_SourceObject}     ${EMPTY}
+${Default_v2_DestinationObject}     ${EMPTY}
+${Default_v2_FilterObject}     ${EMPTY}
+# 对象
+${Default_ObjectType}          ip
+${Default_CategoryType}          fqdn
+${Default_ObjectSubType}       ${EMPTY}
+${Default_IsInitialize}        ${0}
+${Default_IsExclusion}         ${0}
+${Default_ObjectName}          autotestobj
+${Default_ObjectDesc}          autotestobj
+${Default_SubObjectIds}        ${None}
+${Default_Dimension}	Function
+${Default_Origin}			   net
+${Default_AddItem_AddrType}            ${4}
+${Default_AddItem_Protocol}            ${0}
+${Default_AddItem_Direction}           ${0}
+${Default_AddItem_IsSession}           endpoint
+${Default_AddItem_ServerIpFormat}      range
+${Default_AddItem_ServerIp1}           ${EMPTY}    	    
+${Default_AddItem_ServerIp2}           ${EMPTY}
+${Default_AddItem_ServerPort}          ${0}/${0}
+${Default_AddItem_IsHexbin}            ${0}
+${Default_AddItem_IsInitialize}        ${0}
+${Default_AddItem_ItemName}            ${EMPTY}
+${Default_AddItem_ItemDesc}            ${EMPTY}
+#默认客户端条件类型：clientip or clientsubid or clientImsi or clientPhoneNumber or clientApn
+${Default_Client_Type}		clientip
+${Default_Client_subidType}		clientsubid
+${Default_Client_imsiType}		clientImsi
+${Default_Client_phonenumberType}		clientPhoneNumber
+${Default_Client_apnType}		clientApn
+${Default_PolicyEnabled}	open
+${Default_PolicyLogSession}	1

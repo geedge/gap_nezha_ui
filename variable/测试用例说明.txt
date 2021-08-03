@@ -1,0 +1,134 @@
+数据文件：
+	数据文件用来存放页面的测试用例数据，所有测试用例在yaml文件中以列表形式存在，每个测试用例内由字典组成。
+
+数据文件的命名：
+	数据文件命名全小写多单词下划线分隔+_data,例：response_page_data
+
+测试用例编写规则：
+	页面所有测试用例以列表形式作为字典的value保存在文件内，字典的key同文件名一致，例：
+		response_page_data：
+			-
+				测试用例1
+			-
+				测试用例2
+			...
+
+模板内不同操作类型对应用例编写方式：
+	input： 文本框输入
+		模板：														
+			type: input
+			position: id=responsepages_profileName1
+			value: profileName
+		用例：
+			profileName：输入的文本
+	
+	upload：上传文件
+		模板：
+			type: upload
+			position: 上传文件定位
+			value: file
+		用例：
+			file：文件路径
+	
+	click：点击
+		模板：
+			type: click
+			position: 按钮定位
+			value: buttonName
+		用例：
+			buttonName：null （由于按钮不需传入定位等数据，所有value值可任意）
+	
+	combination：应用于多级操作，递归执行combination下的操作。
+		该操作为多级操作，编写用例时要与模板的层级对应
+		模板：
+			下面该多级操作为Insert Script创建页面对Script Type的操作，请参考页面。
+			type: combination
+			position: id=insert_select_format
+			value: Script Type
+			data:
+				- 
+				   type: click
+				   position: xpath=/html/body/div/div[1]/div[1]/ul/li[1]
+				   value: css
+				   data: null
+				-
+				   type: click
+				   position: xpath=/html/body/div/div[1]/div[1]/ul/li[2]
+				   value: js
+				   data: 
+					  -
+						 type: click
+						 position: id=insert_select_insertOn
+						 value: Insert on
+						 data:
+							-
+							   type: click
+							   position: xpath=/html/body/div[last()]/div[1]/div[1]/ul/li[1]
+							   value: Before Page Load
+							   data: null
+		用例：
+			Script Type：
+				-
+					js：
+						-
+							Insert on：
+								- Before Page Load
+	
+	switch：开关按钮
+		模板：
+			type: switch
+			position: 按钮的定位
+			value: switchName（按钮的名称）
+			default: open（按钮的默认状态open、close）
+		用例：
+			switchName：close
+	
+	switchCombination：开关按钮的组合操作。
+		模板：
+			type: switchCombination
+			position: 开关按钮定位
+			value: switchCombinationName（按钮的名称）
+			default: open（按钮的默认状态open、close）
+			data:
+				-
+					type: input
+					position: id=hijack_contentName
+					value: downloadName
+		用例：
+			switchCombinationName：
+				-
+					action：close
+				-
+					downloadName：输入的文本
+					
+	radioButton：单选按钮
+		模板：
+			type: radioButton
+			position：null （由于没有定位所有给null）
+			value: Fail Action
+			data:
+				-
+				   type: click
+				   position: id=decryptionfail-close
+				   value: Fail-close
+				-
+				   type: click
+				   position: id=decryptionpass-through
+				   value: Pass-through
+		用例：
+			Fail Action：Fail-close
+			
+			
+测试用例样例：
+	response_page页面创建+修改测试用例
+	response_page_data:
+		-   
+		  -
+			 operatingType: create
+			 profileName: testname
+			 file: responsepage/creat_response_pages.htm
+		  -
+			 operatingType: edit
+			 profileName: Edittestname
+			 file: responsepage/creat_response_pages.htm
+		-

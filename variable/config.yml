@@ -1,0 +1,38 @@
+#待执行的产品项目， Cloud -云项目； rfcode -执行所有的项目
+#https://www.cnblogs.com/jun-zi/p/12055300.html
+ProductItem: Cloud
+
+#待执行的测试套件（标签）， all -所有的测试套件: debug -调试中套件； login -登录功能 ; filter -账号筛选: P1 -一级用例
+testSuite: P1
+
+#测试报告标题                                        
+testReportTitle: Cloud_Report
+
+#失败重试开关， 0 -关， 1 -开 ，开启后默认重试一次
+retry_switch: 0
+#失败重试次数
+retryTime: 1
+
+#发送测试报告邮件开关， 0 -关， 1 -开                
+emailSwitch: 1
+
+#邮件配置
+#发件邮箱
+smtp_server: smtp.126.com
+server_username: XXXtest@126.com
+server_pwd: XXXXXX
+#收件人（列表）
+msg_to:
+- XXX1@qq.com
+- XXX2@126.com
+
+#邮件主题
+msg_subject: '[XX项目][测试环境-develop][jira号][自动化测试报告]'
+
+#日志级别（字典），由高到低： CRITICAL 、 ERROR 、 WARNING 、 INFO 、 DEBUG
+log:
+    file_name: test.log
+    backup: 5
+    console_level: DEBUG           #控制台日志级别
+    file_level: DEBUG              #文件日志级别
+    pattern: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'

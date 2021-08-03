@@ -1,0 +1,31 @@
+user_data:
+   -
+      -
+         operatingType: create
+         User: testUser
+         Username: testUser
+         Password: '111111'
+         ConfirmPassword: '111111'
+         E-mail: test@qq.com
+         Mobile: test123
+         Role:
+            -
+               RoleText: test
+         Enable: open
+         searchCriteria: User
+      -
+         operatingType: edit
+         User: testUser111
+         searchCriteria: User    #搜索条件
+         
+user_column_setup_data:
+   -
+      column_setup_position: click
+      cancel_show:
+         - Role
+         - Last login time
+      save_column_setup: click
+      assertPosition:
+         - xpath=//*[@id="userTable"]/div[2]/table/thead/tr/th[5]/div/span
+         - xpath=//*[@id="userTable"]/div[2]/table/thead/tr/th[7]/div/span
+         

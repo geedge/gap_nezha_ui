@@ -1,0 +1,78 @@
+#user正向用例
+user_page:
+  #"打开页面数据":
+   openCreateOrEditPage:
+      create:
+         - xpath=//*[@id="app"]/div/div[1]/ul[2]/li[6]/div/span
+         - xpath=//*[@id="app"]/div/div[1]/ul[2]/li[6]/ul/li[1]
+         - id=account-add
+      edit:
+         - xpath=//*[@id="userTable"]/div[4]/div[2]/table/tbody/tr/td[11]/div/div/div/div
+         - xpath=/html/body/ul/li[1]
+         
+   templateData:
+      - 
+         type: input
+         position: id=account-input-name
+         value: User
+      - 
+         type: input
+         position: id=account-input-username
+         value: Username
+      - 
+         type: input
+         position: id=account-input-password
+         value: Password
+      - 
+         type: input
+         position: id=account-input-pinChange
+         value: ConfirmPassword
+      - 
+         type: input
+         position: id=account-input-email
+         value: E-mail
+      - 
+         type: input
+         position: id=account-input-mobile
+         value: Mobile
+      - 
+         type: combination
+         position: id=account-input-roleIds
+         value: Role
+         data:
+            -
+               type: clickText
+               value: RoleText
+               data: null
+      - 
+         type: switch
+         position: xpath=//*[@id="app"]/div/div[2]/div[2]/div/div[2]/div[2]/div/form/div[8]/div/div
+         value: Enable
+         default: open
+      -
+         type: click
+         position: xpath=//*[@id="app"]/div/div[2]/div[2]/div/div/div/div[2]/div[1]/div[2]/button[2]
+         value: column_setup_position
+      -
+         type: columnSetup
+         value: cancel_show
+      -
+         type: click
+         position: xpath=/html/body/div[1]/div/div[2]/div[2]/div/div/div/div[3]/div[3]/div/button[2]
+         value: save_column_setup
+      -
+         type: click
+         position: xpath=//*[@id="userTable"]/div[4]/div[2]/table/tbody/tr[1]/td[11]/div/div/button
+         value: OperationLog
+      -
+         type: click
+         position: xpath=//*[@id="userTable"]/div[4]/div[2]/table/tbody/tr[1]/td[11]/div/div/button
+         value: OperationLog  
+   okOrCancel:
+      position: id=asset-edit-save    #创建修改确定按钮
+      search: type1      #搜索框种类，不同页面搜索框定位可能不相同
+      User: xpath=//*[@id="userTable"]/div[3]/table/tbody/tr[1]/td[3]/div/span     #Name定位  因搜索条件为User故该key为User
+      ID: xpath=//*[@id="userTable"]/div[3]/table/tbody/tr[1]/td[2]/div/span       # ID定位
+      delete: id=account-list-batch-delete     #删除按钮定位
+      Selected: xpath=//*[@id="userTable"]/div[3]/table/tbody/tr/td[1]/div/label/span/span     #查询后第一条数据的选中框定位
+      
